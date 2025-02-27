@@ -12,15 +12,29 @@ E.g. rotating the list [3, 2, 4, 1] produces [1, 3, 2, 4].
 
 "Sorted list" refers to a list where the elements are arranged in the increasing order e.g. [1, 3, 5, 7].
 
-BREAKDOWN:
+OBSERVATIONS:
+    - BREAKDOWN:
 
-1 - Rotating Sorted list, number of times Unknown
-2 - Determine the minimum the original list was rotated
-3 - Complexity expected of O(log N), N = len(list)
-4 - List has unique values
-5 - List is rotate by moving the last element to index 0
+    1 - Rotating Sorted list, number of times Unknown
+    2 - Determine the minimum the original list was rotated
+    3 - Complexity expected of O(log N), N = len(list)
+    4 - List has unique values
+    5 - List is rotate by moving the last element to index 0
 
-SOLUTION
+    - SOLUTION
 
-Find Index of lowest value in the list.
-This will tell me how many times the list was rotated. I assume the list cannot be rotated more than its length.
+    Find Index of lowest value in the list.
+    This will tell me how many times the list was rotated. I assume the list cannot be rotated more than its length.
+
+OPTIONAL Bonus 2: Handling repeating numbers
+So far we've assumed that the numbers in the list are unique. What if the numbers can repeat?
+E.g. [5, 6, 6, 9, 9, 9, 0, 0, 2, 3, 3, 3, 3, 4, 4]. Can you modify your solution to handle this special case?
+
+OPTIONAL Bonus 3: Searching in a Rotated List
+Here's a slightly advanced extension to this problem:
+
+You are given list of numbers, obtained by rotating a sorted list an unknown number of times. You are also given a
+target number. Write a function to find the position of the target number within the rotated list. You can assume that
+all the numbers in the list are unique.
+
+Example: In the rotated sorted list [5, 6, 9, 0, 2, 3, 4], the target number 2 occurs at position 5.
