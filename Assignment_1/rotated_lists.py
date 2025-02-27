@@ -1,22 +1,66 @@
 import random
 
 
-def shift_my_list(my_list, rotate: int = 1) -> list:
+def binary_search(my_list, number):
+    low, high = 0, len(my_list) - 1
+    counter = 0
+
+    while low < high:
+        counter += 1
+        print(f'VALUE HIGH: {high}, LOW: {low}')
+        mid = (low + high) // 2
+        print(f'VALUE OF MID: {mid}')
+
+        if mid == number:
+            return f'VALUE FOUND: {mid}, in {counter} attempts!!'
+        if mid < number:
+            low = mid + 1
+        if mid > number:
+            high = mid - 1
+
+    return f'VALUE FOUND: {low}, in {counter} attempts'
+
+
+def shift_my_list(my_list, shift: int = 1) -> list:
     """
     Rotates list last number to index 0
     :param my_list: list to be rotated
-    :param rotate: number of times the list in being rotated. I cannot be a higher number than list length.
+    :param shift: number of times the list in being rotated. I cannot be a higher number than list length.
     :return: Returns rotated list.
     """
-    # Number of rotations cannot be higher than list length
-    if rotate >= len(my_list):
-        rotate = len(my_list) - 1
+    # Modulus prevents unnecessary rotations. Also, slicing and concatenating the list is faster than using a for loop
+    shift = shift % len(my_list)
+    return my_list[- shift:] + my_list[: - shift]
 
-    for x in range(rotate):
-        my_list.insert(0, my_list[- 1])
-        del my_list[- 1]
 
-    return my_list
+def find_number(my_list):
+        low, high = 0, len(my_list) - 1
+
+        while low < high:
+            mid = (low + high) // 2
+            print(f'LOOKING AT HIGH: {my_list[high]}')
+            print(f'LOOKING AT LOW: {my_list[low]}')
+            print(f'LOOKING AT MID: {my_list[mid]}\n')
+
+            # If mid element is greater than the last element, min is in the right half
+            if my_list[mid] > my_list[high]:
+                low = mid + 1
+            else:  # Min is in the left half (or at mid)
+                high = mid
+
+        print(f'NUMBER: {my_list[low - 1]}')
+        return low  # Low is the index of the minimum element (rotation count)
+
+
+
+
+test_list = [
+    2, 5, 9, 12, 15, 18, 22, 25, 28, 31, 35, 38, 41, 44, 48, 51, 54, 58, 61, 64,
+    67, 71, 74, 77, 80, 83, 87, 90, 94, 97, 101, 105, 108, 111, 115, 119, 122, 126, 130, 133,
+    137, 140, 143, 147, 150, 154, 158, 161, 165, 168, 172, 175, 179, 183, 186, 190, 193, 197, 200, 204,
+    208, 211, 215, 218, 222, 225, 229, 233, 237, 240, 244, 248, 251, 255, 259, 263, 266, 270, 274, 277,
+    281, 285, 288, 292, 296, 299, 303, 307, 311, 315, 318, 322, 326, 329, 333, 337, 341, 344, 348, 352
+]
 
 
 sorted_lists = {
@@ -43,10 +87,16 @@ rotated_list = shift_my_list(sorted_lists[rand_list], rand_rotation)
 print(f'Rotated List: {rotated_list}')
 
 # SOLUTION
-last_number = max(rotated_list)
-index = rotated_list.index(last_number)
 
-print(index+1)
+# Linear Searching O(N), good for unsorted data
+# last_number = max(rotated_list)
+
+# index = rotated_list.index(last_number)
+# print(index+1)
+
+# print(binary_search(test_list, 22))
+
+print(find_number(rotated_list))
 
 
 
