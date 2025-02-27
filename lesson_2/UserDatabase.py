@@ -15,12 +15,13 @@ class UserDatabase:
                     return f'User: {user} added!'
             self.user_database.append(user)
             return f'User: {user} added!'
-        else:
-            return f'User: {user} already exists'
+
+        return f'User: {user} already exists'
 
     def find(self, username):
         for x in range(len(self.user_database)):
             if username == self.user_database[x].username:
+                print("User found!")
                 return self.user_database[x]
 
     def update(self, user):
