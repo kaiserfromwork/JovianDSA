@@ -27,7 +27,7 @@ class BST:
         if current is None:
             return []
 
-        #
+        # return bst in order: left node, parent node and right node. ascending order.
         return (self.in_order_traversal(current.left) +
                 [current.key] +
                 self.in_order_traversal(current.right))
@@ -36,6 +36,6 @@ class BST:
         if current_node is None: # if node is None return empty list, will also prevent the code from breaking once the recursion calls a non existing node
             return []
 
-        # return current node first then, left subtree and finally right subtree
+        # return bst: current node first then, left subtree and finally right subtree
         return [current_node.key] + self.pre_order_traversal(current_node.left) \
                + self.pre_order_traversal(current_node.right)
