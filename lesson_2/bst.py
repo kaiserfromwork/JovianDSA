@@ -39,3 +39,11 @@ class BST:
         # return bst: current node first then, left subtree and finally right subtree
         return [current_node.key] + self.pre_order_traversal(current_node.left) \
                + self.pre_order_traversal(current_node.right)
+
+    def post_order_traversal(self, current_node):
+        if current_node is None:
+            return []
+
+        return self.post_order_traversal(current_node.left) \
+               + self.post_order_traversal(current_node.right) + [current_node.key]
+
