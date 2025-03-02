@@ -22,3 +22,20 @@ class BST:
             current_node.right = self._insert_recursive(current_node.right, next_node)
 
         return current_node
+
+    def in_order_traversal(self, current):
+        if current is None:
+            return []
+
+        #
+        return (self.in_order_traversal(current.left) +
+                [current.key] +
+                self.in_order_traversal(current.right))
+
+    def pre_order_traversal(self, current_node):
+        if current_node is None: # if node is None return empty list, will also prevent the code from breaking once the recursion calls a non existing node
+            return []
+
+        # return current node first then, left subtree and finally right subtree
+        return [current_node.key] + self.pre_order_traversal(current_node.left) \
+               + self.pre_order_traversal(current_node.right)
