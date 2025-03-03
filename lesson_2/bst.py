@@ -72,6 +72,6 @@ class BST:
 
     def height_of_tree(self, node):
         if node is None:
-            return -1
+            return -1  # Set to -1 so leaf node can have height of zero
 
         return 1 + max(self.height_of_tree(node.left), self.height_of_tree(node.right))
