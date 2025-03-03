@@ -1,3 +1,4 @@
+import math
 from collections import deque
 
 from Node import Node
@@ -75,3 +76,32 @@ class BST:
             return -1  # Set to -1 so leaf node can have height of zero
 
         return 1 + max(self.height_of_tree(node.left), self.height_of_tree(node.right))
+
+    def size_of_tree(self, node):
+        if node is None:
+            return 0
+
+        return 1 + self.size_of_tree(node.left) + self.size_of_tree(node.right)
+
+    def is_bst(self, node, min_value=float("-inf"), max_value=float("inf")):
+        if node is None:  # returns true since it's a node.
+            return True
+
+        if min_value <= node.key <= max_value:  # checks if node.key is within min and max values. update values
+            return self.is_bst(node.left, min_value, node.key) and self.is_bst(node.right, node.key, max_value)
+        else:
+            return False
+
+    def min_and_max_node(self, node, min_max=None, min_value=float("-inf"), max_value=float("inf")):
+        if min_max is None:  # initiating list.
+            min_max = []
+
+        if node is None:
+            return None if not min_max else (min(min_max), max(min_max))
+
+        if min_value <= node.key <= max_value:  # adding node value to list
+            min_max.append(node.key)
+            self.min_and_max_node(node.left, min_max, min_value, node.key)
+            self.min_and_max_node(node.right, min_max, node.key, max_value)
+
+        return min(min_max), max(min_max) if min_max else None
