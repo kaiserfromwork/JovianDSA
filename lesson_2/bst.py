@@ -1,3 +1,5 @@
+from collections import deque
+
 from Node import Node
 
 
@@ -44,6 +46,24 @@ class BST:
         if current_node is None:
             return []
 
-        return self.post_order_traversal(current_node.left) \
-               + self.post_order_traversal(current_node.right) + [current_node.key]
+        return self.post_order_traversal(current_node.left) + \
+               self.post_order_traversal(current_node.right) + [current_node.key]
 
+    def level_order_traversal(self, current_node):
+        if current_node is None:
+            return []
+
+        result = []
+        queue = deque([current_node])  # First node(root) in the queue
+
+        while queue:
+            node = queue.popleft()  # remove node at the front of the queue
+            result.append(node.key)  # Process the current node
+
+            #  Add children node to the queue
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+
+        return result
