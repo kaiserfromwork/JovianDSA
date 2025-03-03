@@ -25,32 +25,33 @@ class BST:
 
         return current_node
 
-    def in_order_traversal(self, current):
-        if current is None:  # return empty list if node is None. Node will be none if root
+    def in_order_traversal(self, node):
+        if node is None:  # return empty list if node is None. Node will be none if root
             return []
 
         # return bst in order: left node, parent node and right node. ascending order.
-        return (self.in_order_traversal(current.left) +
-                [current.key] +
-                self.in_order_traversal(current.right))
+        return (self.in_order_traversal(node.left) +
+                [node.key] +
+                self.in_order_traversal(node.right))
 
-    def pre_order_traversal(self, current_node):
-        if current_node is None:  # if node is None return empty list, will also prevent the code from breaking once
+    def pre_order_traversal(self, node):
+        if node is None:  # if node is None return empty list, will also prevent the code from breaking once
             return []  # the recursion calls a non existing node
 
         # return bst: current node first then, left subtree and finally right subtree
-        return [current_node.key] + self.pre_order_traversal(current_node.left) \
-               + self.pre_order_traversal(current_node.right)
+        return [node.key] + self.pre_order_traversal(node.left) \
+               + self.pre_order_traversal(node.right)
 
-    def post_order_traversal(self, current_node):
-        if current_node is None:  # if node is Node return empty list.
+    def post_order_traversal(self, node):
+        if node is None:  # if node is Node return empty list.
             return []
 
         # returns left subtree, right subtree and then current node
-        return self.post_order_traversal(current_node.left) \
-               + self.post_order_traversal(current_node.right) + [current_node.key]
+        return self.post_order_traversal(node.left) \
+               + self.post_order_traversal(node.right) + [node.key]
 
-    def level_order_traversal(self, current_node):
+    @staticmethod
+    def level_order_traversal(current_node):
         if current_node is None:  # if node is Node return empty list.
             return []
 
@@ -68,3 +69,9 @@ class BST:
                 queue.append(node.right)
 
         return result
+
+    def height_of_tree(self, node):
+        if node is None:
+            return 0
+
+        return 1 + max(self.height_of_tree(node.left), self.height_of_tree(node.right))
